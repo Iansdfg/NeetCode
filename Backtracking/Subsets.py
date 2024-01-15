@@ -5,14 +5,13 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         subsets = []
-        self.dfs(nums, 0, [], subsets)
+        self.dfs(nums, [], subsets)
         return subsets
 
-    def dfs(self, nums, index, subset, subsets):
-        print(subset)
+    def dfs(self, nums, subset, subsets):
         subsets.append(subset[:])
 
-        for i in range(index, len(nums)):
+        for i in range(len(nums)):
             subset.append(nums[i])
-            self.dfs(nums, i + 1, subset, subsets)
+            self.dfs(nums[i+1:], subset, subsets)
             subset.pop()
