@@ -4,6 +4,7 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
+        
         anagram_strs = dict()
         for string in strs:
             anagram = self.get_anagram(string)
