@@ -22,5 +22,3 @@ class Solution(object):
 
         return stack == []
                 
-
-        
