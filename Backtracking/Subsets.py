@@ -1,17 +1,16 @@
-class Solution(object):
-    def subsets(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
         subsets = []
-        self.dfs(nums, [], subsets)
+        subset = []
+        self.dfs(nums, 0, subset, subsets)
         return subsets
 
-    def dfs(self, nums, subset, subsets):
-        subsets.append(subset[:])
 
-        for i in range(len(nums)):
+    def dfs(self, nums, index, subset, subsets):
+        subsets.append(subset[:])
+        for i in range(index, len(nums)):
             subset.append(nums[i])
-            self.dfs(nums[i+1:], subset, subsets)
+            self.dfs(nums, i + 1, subset, subsets)
             subset.pop()
+
+        
