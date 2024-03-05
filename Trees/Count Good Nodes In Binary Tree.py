@@ -21,9 +21,8 @@ class Solution:
             right_cnt = self.dfs(root.right, max_val)
         
         cnt = left_cnt + right_cnt
-
+   
         if root.val >= max_val:
             cnt += 1 
         return cnt
-        
         
