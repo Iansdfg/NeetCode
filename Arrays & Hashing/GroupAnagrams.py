@@ -1,28 +1,22 @@
-class Solution(object):
-    def groupAnagrams(self, strs):
-        """
-        :type strs: List[str]
-        :rtype: List[List[str]]
-        """
-        
-        anagram_strs = dict()
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        ana_to_string = dict()
         for string in strs:
             anagram = self.get_anagram(string)
-            if anagram in anagram_strs:
-                anagram_strs[anagram].append(string)
+            if anagram not in ana_to_string:
+                ana_to_string[anagram] = [string]
             else:
-                anagram_strs[anagram] = [string]
+                ana_to_string[anagram].append(string)
         res = []
-        for anagram in anagram_strs:
-            res.append(anagram_strs[anagram])
-        return res
+        for anagram in ana_to_string:
+            res.append(ana_to_string[anagram])
 
+        
+        return res 
+    
     def get_anagram(self, string):
-        res = [0]*26
+        ana = [0] * 26
         for char in string:
-            res[ord(char)-97] += 1 
-        return str(res)
-
-
-
-
+            pos = ord(char) - 97
+            ana[pos] += 1 
+        return str(ana)
