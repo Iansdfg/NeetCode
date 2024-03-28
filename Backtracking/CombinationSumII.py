@@ -1,26 +1,21 @@
-class Solution(object):
-    def combinationSum2(self, candidates, target):
-        """
-        :type candidates: List[int]
-        :type target: int
-        :rtype: List[List[int]]
-        """
-        candidates = sorted(candidates)
-        combination_sums = []
-        self.dfs(candidates, target, [], combination_sums)
-        return combination_sums
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()
+        print(candidates)
+        combinations = []
+        self.dfs(candidates, target, 0, [], combinations)
+        return combinations
 
-    def dfs(self, candidates, target, combination_sum, combination_sums):
-        if target < 0:
+    def dfs(self, candidates, target, index, combination, combinations):
+        if sum(combination) > target:
+            return 
+        if sum(combination) == target:
+            combinations.append(combination[:])
             return 
         
-        if target == 0:
-            combination_sums.append(combination_sum[:])
-            return 
-
-        for i in range(len(candidates)):
-            if i > 0 and candidates[i] == candidates[i-1]:
-                continue
-            combination_sum.append(candidates[i])
-            self.dfs(candidates[i+1:], target-candidates[i], combination_sum, combination_sums)
-            combination_sum.pop()
+        for i in range(index, len(candidates)):
+            if i > index and candidates[i] == candidates[i-1]:
+                continue 
+            combination.append(candidates[i])
+            self.dfs(candidates, target, i + 1, combination, combinations)
+            combination.pop()
