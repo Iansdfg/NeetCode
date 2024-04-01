@@ -1,38 +1,29 @@
 num_char = {
-    2:['a', 'b', 'c'],
-    3:['d', 'e', 'f'],
-    4:['g', 'h', 'i'],
-    5:['j', 'k', 'l'],
-    6:['m', 'n', 'o'],
-    7:['p', 'q', 'r', 's'],
-    8:['t', 'u', 'v'],
-    9:['w', 'x', 'y', 'z']
+    '2':['a', 'b', 'c'],
+    '3':['d', 'e', 'f'],
+    '4':['g', 'h', 'i'],
+    '5':['j', 'k', 'l'],
+    '6':['m', 'n', 'o'],
+    '7':['p', 'q', 'r', 's'],
+    '8':['t', 'u', 'v'],
+    '9':['w', 'x', 'y', 'z']
 }
 
-
-class Solution(object):
-    def letterCombinations(self, digits):
-        """
-        :type digits: str
-        :rtype: List[str]
-        """
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
         if not digits:
             return []
-        res = []
-        self.dfs(0, digits, [], res)
-        return res
+        combinations = []
+        self.dfs(digits, 0, [], combinations)
+        return combinations
 
+    def dfs(self, digits, digit, combination, combinations):
+        if digit == len(digits):
+            combinations.append(''.join(combination[:]))
+            return
 
-    def dfs(self, level, digits, combination, res):
-        if level > len(digits):
-            return 
-        if len(combination) == len(digits):
-            res.append(''.join(combination))
-            return 
-        chars = num_char[int(digits[level])]
-
-        for i in range(len(chars)):
-            combination.append(chars[i])
-            self.dfs(level + 1, digits, combination, res)
+        chars = num_char[digits[digit]]
+        for char in chars:
+            combination.append(char)
+            self.dfs(digits, digit + 1, combination, combinations)
             combination.pop()
-        
