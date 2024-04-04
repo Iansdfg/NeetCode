@@ -1,23 +1,24 @@
-class Solution(object):
-    def maxArea(self, height):
-        """
-        :type height: List[int]
-        :rtype: int
-        """
-        l, r = 0, len(height) - 1 
-        max_are = 0
-        while l < r:
-            water_area = self.count_water(l, r, height)
-            max_are = max(max_are, water_area)
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        left, right = 0, len(height)-1
+        max_area = self.area(height, left, right)
+        while left < right:
+            if height[left] > height[right]:
+                right -= 1 
+            elif height[left] < height[right]:
+                left += 1
+            else:
+                left += 1 
+                right -= 1
 
-            if height[l] >= height[r]:
-                r -= 1 
-            elif height[l] < height[r]:
-                l += 1 
-            
-        return max_are
-            
+            max_area = max(max_area, self.area(height, left, right))
 
-    def count_water(self, l, r, height):
-        water = (r - l) * min(height[l], height[r])
-        return water
+        return max_area
+
+
+    def area(self, height, left, right):
+        h = min(height[left], height[right])
+        w = right - left
+        return h*w
+
+        
