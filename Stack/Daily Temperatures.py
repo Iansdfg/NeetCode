@@ -10,4 +10,4 @@ class Solution:
             stack.append((day, temp))
         return answer
 
-            
+        
