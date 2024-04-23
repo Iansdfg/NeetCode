@@ -1,32 +1,22 @@
-# nlogn
-import heapq
-class Solution(object):
-    def topKFrequent(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
+from heapq import(
+    heappush,
+    heappop
+)
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         num_cnt = {}
-        for i in range(len(nums)):
-            if nums[i] not in num_cnt:
-                num_cnt[nums[i]] = 1 
-            else:
-                num_cnt[nums[i]] += 1 
-
+        for num in nums:
+            num_cnt[num] = num_cnt.get(num, 0) + 1
+        
         heap = []
         for num in num_cnt:
-            pair = (num_cnt[num] * -1, num)
-            heapq.heappush(heap, pair)
+            heappush(heap, (-1 * num_cnt[num], num))
 
         res = []
         for _ in range(k):
-            cnt, num = heapq.heappop(heap)
+            cnt, num = heappop(heap)
             res.append(num)
-
         return res 
 
 
-
-
-            
+        
